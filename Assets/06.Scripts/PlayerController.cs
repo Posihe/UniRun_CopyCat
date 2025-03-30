@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         isDead = true;
         anim.SetTrigger("Dead");
-        // transform.Translate(gameObject.transform.position+=(new Vector2(0, 3)));
+       
         playerrigidbody.AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
 
 
