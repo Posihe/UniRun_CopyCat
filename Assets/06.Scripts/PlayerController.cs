@@ -1,19 +1,25 @@
 
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public int jumpcount = 2;
+    public Transform start;
+    public Transform target;
+    public float speed = 10;
     private Animator anim;
     private bool isRollingReady;
     private bool isGround;
     private bool isDead;
-    bool isInTunnel = false;
+   public bool isInTunnel = false;
     private Rigidbody2D playerrigidbody;
     private AudioSource playerAudio;
     public AudioClip jumpClip;
     public AudioClip deadClip;
+
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,6 +30,7 @@ public class PlayerController : MonoBehaviour
         isDead = false;
         playerrigidbody = GetComponent<Rigidbody2D>();
         playerAudio = GetComponent<AudioSource>();
+       
 
     }
 
@@ -36,17 +43,23 @@ public class PlayerController : MonoBehaviour
             Down();
             Jump();
         }
-        if (isInTunnel && Input.GetKeyDown(KeyCode.DownArrow))
+        
+
+          if(isInTunnel==true &&Input.GetKeyDown(KeyCode.DownArrow ))
         {
-            StartCoroutine(Bonus());
+            StartCoroutine(InTunnel());
+
         }
+           
+
+        
     }
 
     public void Move()
     {
         isRollingReady = false;
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        float speed = 10;
+       
         float xinput = Input.GetAxis("Horizontal");
         spriteRenderer.flipX = xinput < 0 ? true : false;
         if ((xinput > 0 || xinput < 0)) 
@@ -61,10 +74,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    
+
     public void Down()
     {
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow)&&isInTunnel==false)
         {
             anim.SetBool("Down", true);
             isRollingReady = true;
@@ -72,7 +87,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            anim.SetBool("Down", false);
+           
             isRollingReady = false;
 
         }
@@ -109,16 +124,22 @@ public class PlayerController : MonoBehaviour
             
 
         }
-        if(collision.gameObject.CompareTag("Tunnel")&&Input.GetKeyDown(KeyCode.DownArrow))
-        {
-          
-            isInTunnel = true; 
 
-        }
+        
 
        
     }
-   
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Tunnel") )
+        {
+            
+            isInTunnel = true;
+           
+
+        }
+    }
+
 
     public void Die()
     {
@@ -141,6 +162,14 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dead());
            
         }
+
+        if (collision.gameObject.CompareTag("Potal"))
+        {
+
+            SceneManager.LoadScene(1);
+
+        }
+
     }
 
     IEnumerator Dead()
@@ -150,11 +179,16 @@ public class PlayerController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    IEnumerator Bonus()
+   IEnumerator InTunnel()
     {
-        anim.SetBool("Bonus", true);
-        yield return new WaitForSeconds(2);
-        anim.SetBool("Bonus", false);
+        GameObject tunnelObject = GameObject.FindWithTag("Tunnel");
+        tunnelObject.GetComponent<BoxCollider2D>().enabled = false;
+
+       
+        
+        yield return new WaitForSeconds(1);
+        tunnelObject.GetComponent<BoxCollider2D>().enabled = true;
+
 
     }
 

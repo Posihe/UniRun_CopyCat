@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Rava_4
+  m_Name: Rava
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -1013760585851560218, guid: e6e5fd3568be4fe4b99feebe151ce637, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
