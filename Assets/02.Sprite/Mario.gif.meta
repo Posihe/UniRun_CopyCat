@@ -303,6 +303,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -311,9 +324,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 522
-        width: 123
-        height: 56
+        y: 523
+        width: 122
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -332,10 +345,10 @@ TextureImporter:
       name: Mario_1
       rect:
         serializedVersion: 2
-        x: 250
-        y: 551
-        width: 85
-        height: 27
+        x: 251
+        y: 552
+        width: 83
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -354,10 +367,10 @@ TextureImporter:
       name: Mario_2
       rect:
         serializedVersion: 2
-        x: 194
-        y: 511
-        width: 196
-        height: 36
+        x: 195
+        y: 512
+        width: 194
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -376,10 +389,10 @@ TextureImporter:
       name: Mario_3
       rect:
         serializedVersion: 2
-        x: 386
-        y: 537
-        width: 18
-        height: 10
+        x: 387
+        y: 538
+        width: 16
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -398,10 +411,10 @@ TextureImporter:
       name: Mario_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 462
-        width: 258
-        height: 17
+        x: 1
+        y: 463
+        width: 19
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -420,10 +433,10 @@ TextureImporter:
       name: Mario_5
       rect:
         serializedVersion: 2
-        x: 387
-        y: 456
-        width: 15
-        height: 34
+        x: 388
+        y: 457
+        width: 13
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -442,10 +455,10 @@ TextureImporter:
       name: Mario_6
       rect:
         serializedVersion: 2
-        x: 401
-        y: 456
-        width: 161
-        height: 34
+        x: 402
+        y: 457
+        width: 159
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -464,10 +477,10 @@ TextureImporter:
       name: Mario_7
       rect:
         serializedVersion: 2
-        x: 561
-        y: 456
-        width: 15
-        height: 34
+        x: 562
+        y: 457
+        width: 13
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -487,9 +500,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 376
-        width: 25
-        height: 81
+        y: 377
+        width: 24
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -508,10 +521,10 @@ TextureImporter:
       name: Mario_9
       rect:
         serializedVersion: 2
-        x: 24
-        y: 376
-        width: 66
-        height: 81
+        x: 25
+        y: 377
+        width: 64
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -530,10 +543,10 @@ TextureImporter:
       name: Mario_10
       rect:
         serializedVersion: 2
-        x: 89
-        y: 376
-        width: 26
-        height: 81
+        x: 90
+        y: 377
+        width: 24
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -552,10 +565,10 @@ TextureImporter:
       name: Mario_11
       rect:
         serializedVersion: 2
-        x: 125
-        y: 421
-        width: 50
-        height: 34
+        x: 126
+        y: 422
+        width: 48
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -574,10 +587,10 @@ TextureImporter:
       name: Mario_12
       rect:
         serializedVersion: 2
-        x: 266
-        y: 283
-        width: 260
-        height: 162
+        x: 267
+        y: 284
+        width: 258
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -596,10 +609,10 @@ TextureImporter:
       name: Mario_13
       rect:
         serializedVersion: 2
-        x: 522
-        y: 381
-        width: 50
-        height: 57
+        x: 523
+        y: 382
+        width: 48
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -618,10 +631,10 @@ TextureImporter:
       name: Mario_14
       rect:
         serializedVersion: 2
-        x: 6
-        y: 281
-        width: 146
-        height: 82
+        x: 7
+        y: 282
+        width: 144
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -640,10 +653,10 @@ TextureImporter:
       name: Mario_15
       rect:
         serializedVersion: 2
-        x: 158
-        y: 282
-        width: 98
-        height: 58
+        x: 531
+        y: 340
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -662,10 +675,10 @@ TextureImporter:
       name: Mario_16
       rect:
         serializedVersion: 2
-        x: 530
-        y: 339
-        width: 34
-        height: 34
+        x: 159
+        y: 283
+        width: 96
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -684,10 +697,10 @@ TextureImporter:
       name: Mario_17
       rect:
         serializedVersion: 2
-        x: 3
-        y: 138
-        width: 99
-        height: 130
+        x: 4
+        y: 139
+        width: 97
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -706,10 +719,10 @@ TextureImporter:
       name: Mario_18
       rect:
         serializedVersion: 2
-        x: 301
-        y: 139
-        width: 144
-        height: 130
+        x: 302
+        y: 140
+        width: 142
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -728,10 +741,10 @@ TextureImporter:
       name: Mario_19
       rect:
         serializedVersion: 2
-        x: 463
-        y: 251
-        width: 112
-        height: 26
+        x: 464
+        y: 252
+        width: 110
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -750,10 +763,10 @@ TextureImporter:
       name: Mario_20
       rect:
         serializedVersion: 2
-        x: 111
-        y: 184
-        width: 102
-        height: 54
+        x: 112
+        y: 185
+        width: 100
+        height: 52
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -772,10 +785,10 @@ TextureImporter:
       name: Mario_21
       rect:
         serializedVersion: 2
-        x: 279
-        y: 192
-        width: 18
-        height: 35
+        x: 280
+        y: 193
+        width: 16
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -794,10 +807,10 @@ TextureImporter:
       name: Mario_22
       rect:
         serializedVersion: 2
-        x: 454
-        y: 137
-        width: 115
-        height: 55
+        x: 509
+        y: 192
+        width: 73
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -816,10 +829,10 @@ TextureImporter:
       name: Mario_23
       rect:
         serializedVersion: 2
-        x: 508
-        y: 191
-        width: 75
-        height: 45
+        x: 117
+        y: 140
+        width: 140
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -838,10 +851,10 @@ TextureImporter:
       name: Mario_24
       rect:
         serializedVersion: 2
-        x: 116
-        y: 139
-        width: 142
-        height: 46
+        x: 265
+        y: 141
+        width: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -860,10 +873,10 @@ TextureImporter:
       name: Mario_25
       rect:
         serializedVersion: 2
-        x: 264
-        y: 140
-        width: 34
-        height: 50
+        x: 455
+        y: 138
+        width: 113
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -882,10 +895,10 @@ TextureImporter:
       name: Mario_26
       rect:
         serializedVersion: 2
-        x: 4
-        y: 91
-        width: 194
-        height: 45
+        x: 5
+        y: 92
+        width: 192
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -904,10 +917,10 @@ TextureImporter:
       name: Mario_27
       rect:
         serializedVersion: 2
-        x: 206
-        y: 86
-        width: 8
-        height: 11
+        x: 207
+        y: 87
+        width: 6
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -926,10 +939,10 @@ TextureImporter:
       name: Mario_28
       rect:
         serializedVersion: 2
-        x: 213
-        y: 86
-        width: 70
-        height: 11
+        x: 214
+        y: 87
+        width: 68
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -948,10 +961,10 @@ TextureImporter:
       name: Mario_29
       rect:
         serializedVersion: 2
-        x: 282
-        y: 86
-        width: 8
-        height: 11
+        x: 283
+        y: 87
+        width: 6
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -970,10 +983,10 @@ TextureImporter:
       name: Mario_30
       rect:
         serializedVersion: 2
-        x: 324
-        y: 58
-        width: 34
-        height: 34
+        x: 405
+        y: 86
+        width: 14
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -992,10 +1005,10 @@ TextureImporter:
       name: Mario_31
       rect:
         serializedVersion: 2
-        x: 404
-        y: 85
-        width: 16
-        height: 15
+        x: 429
+        y: 87
+        width: 14
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1014,10 +1027,10 @@ TextureImporter:
       name: Mario_32
       rect:
         serializedVersion: 2
-        x: 428
+        x: 451
         y: 86
-        width: 16
-        height: 18
+        width: 14
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1036,10 +1049,10 @@ TextureImporter:
       name: Mario_33
       rect:
         serializedVersion: 2
-        x: 450
-        y: 85
-        width: 16
-        height: 15
+        x: 507
+        y: 62
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1058,10 +1071,10 @@ TextureImporter:
       name: Mario_34
       rect:
         serializedVersion: 2
-        x: 506
-        y: 61
-        width: 34
-        height: 66
+        x: 552
+        y: 55
+        width: 26
+        height: 73
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1080,10 +1093,10 @@ TextureImporter:
       name: Mario_35
       rect:
         serializedVersion: 2
-        x: 551
-        y: 54
-        width: 28
-        height: 75
+        x: 576
+        y: 64
+        width: 8
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1102,10 +1115,10 @@ TextureImporter:
       name: Mario_36
       rect:
         serializedVersion: 2
-        x: 575
-        y: 63
-        width: 9
-        height: 66
+        x: 4
+        y: 40
+        width: 14
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1124,10 +1137,10 @@ TextureImporter:
       name: Mario_37
       rect:
         serializedVersion: 2
-        x: 3
-        y: 39
-        width: 16
-        height: 45
+        x: 19
+        y: 40
+        width: 131
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1146,10 +1159,10 @@ TextureImporter:
       name: Mario_38
       rect:
         serializedVersion: 2
-        x: 18
-        y: 39
-        width: 133
-        height: 45
+        x: 151
+        y: 75
+        width: 15
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1168,10 +1181,10 @@ TextureImporter:
       name: Mario_39
       rect:
         serializedVersion: 2
-        x: 150
-        y: 74
-        width: 17
-        height: 10
+        x: 207
+        y: 71
+        width: 6
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1190,10 +1203,10 @@ TextureImporter:
       name: Mario_40
       rect:
         serializedVersion: 2
-        x: 150
-        y: 49
-        width: 17
-        height: 26
+        x: 214
+        y: 71
+        width: 68
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1212,10 +1225,10 @@ TextureImporter:
       name: Mario_41
       rect:
         serializedVersion: 2
-        x: 206
-        y: 70
-        width: 8
-        height: 17
+        x: 283
+        y: 71
+        width: 6
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1234,10 +1247,10 @@ TextureImporter:
       name: Mario_42
       rect:
         serializedVersion: 2
-        x: 213
-        y: 70
-        width: 70
-        height: 17
+        x: 325
+        y: 59
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1256,10 +1269,10 @@ TextureImporter:
       name: Mario_43
       rect:
         serializedVersion: 2
-        x: 282
-        y: 70
-        width: 8
-        height: 17
+        x: 151
+        y: 50
+        width: 15
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1278,10 +1291,10 @@ TextureImporter:
       name: Mario_44
       rect:
         serializedVersion: 2
-        x: 443
-        y: 48
-        width: 26
-        height: 26
+        x: 207
+        y: 54
+        width: 6
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1300,10 +1313,10 @@ TextureImporter:
       name: Mario_45
       rect:
         serializedVersion: 2
-        x: 206
-        y: 53
-        width: 8
-        height: 11
+        x: 214
+        y: 54
+        width: 68
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1322,10 +1335,10 @@ TextureImporter:
       name: Mario_46
       rect:
         serializedVersion: 2
-        x: 206
-        y: 37
-        width: 8
-        height: 17
+        x: 283
+        y: 54
+        width: 6
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1344,10 +1357,10 @@ TextureImporter:
       name: Mario_47
       rect:
         serializedVersion: 2
-        x: 213
-        y: 53
-        width: 70
-        height: 11
+        x: 396
+        y: 40
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1366,10 +1379,10 @@ TextureImporter:
       name: Mario_48
       rect:
         serializedVersion: 2
-        x: 213
-        y: 37
-        width: 70
-        height: 17
+        x: 444
+        y: 49
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1388,10 +1401,10 @@ TextureImporter:
       name: Mario_49
       rect:
         serializedVersion: 2
-        x: 282
-        y: 53
-        width: 8
-        height: 11
+        x: 469
+        y: 49
+        width: 7
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1410,10 +1423,10 @@ TextureImporter:
       name: Mario_50
       rect:
         serializedVersion: 2
-        x: 282
-        y: 37
-        width: 8
-        height: 17
+        x: 151
+        y: 38
+        width: 15
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1432,10 +1445,10 @@ TextureImporter:
       name: Mario_51
       rect:
         serializedVersion: 2
-        x: 395
-        y: 39
-        width: 34
-        height: 34
+        x: 167
+        y: 38
+        width: 25
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1454,10 +1467,10 @@ TextureImporter:
       name: Mario_52
       rect:
         serializedVersion: 2
-        x: 468
-        y: 48
-        width: 9
-        height: 8
+        x: 193
+        y: 38
+        width: 7
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1476,10 +1489,10 @@ TextureImporter:
       name: Mario_53
       rect:
         serializedVersion: 2
-        x: 495
-        y: 26
-        width: 18
-        height: 27
+        x: 207
+        y: 38
+        width: 6
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1498,10 +1511,10 @@ TextureImporter:
       name: Mario_54
       rect:
         serializedVersion: 2
-        x: 150
-        y: 37
-        width: 17
-        height: 13
+        x: 214
+        y: 38
+        width: 68
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1520,10 +1533,10 @@ TextureImporter:
       name: Mario_55
       rect:
         serializedVersion: 2
-        x: 166
-        y: 37
-        width: 27
-        height: 13
+        x: 283
+        y: 38
+        width: 6
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1542,10 +1555,10 @@ TextureImporter:
       name: Mario_56
       rect:
         serializedVersion: 2
-        x: 192
-        y: 37
-        width: 9
-        height: 13
+        x: 321
+        y: 30
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1564,10 +1577,10 @@ TextureImporter:
       name: Mario_57
       rect:
         serializedVersion: 2
-        x: 320
-        y: 29
-        width: 66
-        height: 18
+        x: 469
+        y: 27
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1586,10 +1599,10 @@ TextureImporter:
       name: Mario_58
       rect:
         serializedVersion: 2
-        x: 468
-        y: 26
-        width: 18
-        height: 18
+        x: 496
+        y: 27
+        width: 16
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1608,10 +1621,10 @@ TextureImporter:
       name: Mario_59
       rect:
         serializedVersion: 2
-        x: 561
-        y: 27
-        width: 18
-        height: 18
+        x: 562
+        y: 28
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1630,10 +1643,10 @@ TextureImporter:
       name: Mario_60
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 258
-        height: 31
+        width: 256
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1652,10 +1665,10 @@ TextureImporter:
       name: Mario_61
       rect:
         serializedVersion: 2
-        x: 265
-        y: 1
-        width: 66
-        height: 18
+        x: 266
+        y: 2
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1674,10 +1687,10 @@ TextureImporter:
       name: Mario_62
       rect:
         serializedVersion: 2
-        x: 339
-        y: 1
-        width: 50
-        height: 18
+        x: 340
+        y: 2
+        width: 48
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1696,10 +1709,10 @@ TextureImporter:
       name: Mario_63
       rect:
         serializedVersion: 2
-        x: 395
-        y: 0
-        width: 34
-        height: 34
+        x: 396
+        y: 1
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1718,10 +1731,10 @@ TextureImporter:
       name: Mario_64
       rect:
         serializedVersion: 2
-        x: 431
-        y: 0
-        width: 34
-        height: 34
+        x: 432
+        y: 1
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1740,10 +1753,10 @@ TextureImporter:
       name: Mario_65
       rect:
         serializedVersion: 2
-        x: 468
-        y: 6
-        width: 18
-        height: 18
+        x: 469
+        y: 7
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1762,10 +1775,10 @@ TextureImporter:
       name: Mario_66
       rect:
         serializedVersion: 2
-        x: 491
-        y: 6
-        width: 18
-        height: 18
+        x: 492
+        y: 7
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1784,10 +1797,10 @@ TextureImporter:
       name: Mario_67
       rect:
         serializedVersion: 2
-        x: 515
-        y: 6
-        width: 18
-        height: 18
+        x: 516
+        y: 7
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1806,10 +1819,10 @@ TextureImporter:
       name: Mario_68
       rect:
         serializedVersion: 2
-        x: 538
-        y: 6
-        width: 18
-        height: 18
+        x: 539
+        y: 7
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1828,10 +1841,10 @@ TextureImporter:
       name: Mario_69
       rect:
         serializedVersion: 2
-        x: 561
-        y: 6
-        width: 18
-        height: 18
+        x: 562
+        y: 7
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1850,7 +1863,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5511bd4793271784eb08793ba19139f1
     internalID: 0
     vertices: []
     indices: 

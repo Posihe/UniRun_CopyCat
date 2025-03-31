@@ -1,3 +1,4 @@
+
 using System.Collections;
 using UnityEngine;
 
@@ -8,7 +9,12 @@ public class PlayerController : MonoBehaviour
     private bool isRollingReady;
     private bool isGround;
     private bool isDead;
+    bool isInTunnel = false;
     private Rigidbody2D playerrigidbody;
+    private AudioSource playerAudio;
+    public AudioClip jumpClip;
+    public AudioClip deadClip;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,6 +23,7 @@ public class PlayerController : MonoBehaviour
         isGround = true;
         isDead = false;
         playerrigidbody = GetComponent<Rigidbody2D>();
+        playerAudio = GetComponent<AudioSource>();
 
     }
 
@@ -28,6 +35,10 @@ public class PlayerController : MonoBehaviour
             Move();
             Down();
             Jump();
+        }
+        if (isInTunnel && Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            StartCoroutine(Bonus());
         }
     }
 
@@ -76,6 +87,8 @@ public class PlayerController : MonoBehaviour
        
      if(Input.GetKeyDown(KeyCode.Space) &&jumpcount>0)
         {
+            playerAudio.clip = jumpClip;
+            playerAudio.Play();
             anim.SetBool("Jump",true);
             isGround = false;
             playerrigidbody.linearVelocity = Vector2.zero;
@@ -93,12 +106,24 @@ public class PlayerController : MonoBehaviour
             jumpcount = 2;
             anim.SetBool("Jump", false);
             
+            
 
         }
+        if(collision.gameObject.CompareTag("Tunnel")&&Input.GetKeyDown(KeyCode.DownArrow))
+        {
+          
+            isInTunnel = true; 
+
+        }
+
+       
     }
+   
 
     public void Die()
     {
+        playerAudio.clip = deadClip;
+        playerAudio.Play();
         isDead = true;
         anim.SetTrigger("Dead");
        
@@ -124,4 +149,15 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
     }
+
+    IEnumerator Bonus()
+    {
+        anim.SetBool("Bonus", true);
+        yield return new WaitForSeconds(2);
+        anim.SetBool("Bonus", false);
+
+    }
+
+
+
 }
