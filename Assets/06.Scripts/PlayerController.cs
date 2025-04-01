@@ -6,13 +6,15 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public int jumpcount = 2;
+    public int count;
     public Transform start;
     public Transform target;
     public float speed = 10;
     private Animator anim;
-    private bool isRollingReady;
-    private bool isGround;
+    public bool isRollingReady;
+    public bool isGround;
     private bool isDead;
+    public bool isRooling;
    public bool isInTunnel = false;
     private Rigidbody2D playerrigidbody;
     private AudioSource playerAudio;
@@ -26,10 +28,11 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         isRollingReady = false;
-        isGround = true;
+      
         isDead = false;
         playerrigidbody = GetComponent<Rigidbody2D>();
         playerAudio = GetComponent<AudioSource>();
+        isRooling = false;
        
 
     }
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour
             Move();
             Down();
             Jump();
+            Rolling();
         }
         
 
@@ -79,7 +83,7 @@ public class PlayerController : MonoBehaviour
     public void Down()
     {
 
-        if (Input.GetKey(KeyCode.DownArrow)&&isInTunnel==false)
+        if (Input.GetKey(KeyCode.DownArrow)&&isInTunnel==false && isGround==true)
         {
             anim.SetBool("Down", true);
             isRollingReady = true;
@@ -99,7 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         float jumpForce = 400;
         float yinput = Input.GetAxis("Vertical");
-       
+        
      if(Input.GetKeyDown(KeyCode.Space) &&jumpcount>0)
         {
             playerAudio.clip = jumpClip;
@@ -124,13 +128,18 @@ public class PlayerController : MonoBehaviour
             
 
         }
-
         
 
-       
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
+        if(collision.gameObject.CompareTag("Ground"))
+        {
+            isGround = true;
+
+
+        }
+
         if (collision.gameObject.CompareTag("Tunnel") )
         {
             
@@ -147,9 +156,10 @@ public class PlayerController : MonoBehaviour
         playerAudio.Play();
         isDead = true;
         anim.SetTrigger("Dead");
-       
+        StartCoroutine(Dead());
         playerrigidbody.AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
 
+        
 
     }
 
@@ -169,6 +179,22 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(1);
 
         }
+
+    }
+
+   
+
+    private void Rolling()
+    {
+        if((isRollingReady==true) && Input.GetKeyDown(KeyCode.Return))
+        {
+            count++;
+            anim.SetTrigger("Rolling");
+            isRooling = true;
+
+            //transform.position += (Vector3)new Vector2(count, 0) * (speed *2)* Time.deltaTime;
+        }
+
 
     }
 
@@ -192,6 +218,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGround = false; // 플레이어가 땅에서 떨어지면 즉시 isGround = false
+        }
+    }
 
 }
