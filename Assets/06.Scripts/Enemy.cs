@@ -70,7 +70,7 @@ public class Enemy : MonoBehaviour
 
 
             PlayerController player = collision.gameObject.GetComponentInParent<PlayerController>();
-            if (player.isRooling == false)
+            if (player.isRoling == false)
             {
                 Vector2 hitPoint = collision.ClosestPoint(transform.position);
                 Vector2 direction = (hitPoint - (Vector2)transform.position).normalized;
@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
             }
 
 
-            if (player.isRooling == true)
+            if (player.isRoling == true)
             {
 
                 Die();

@@ -3,10 +3,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 public class PlayerController : MonoBehaviour
 {
     public int jumpcount = 2;
-    public int count;
+    public float pressTime;
     public Transform start;
     public Transform target;
     public float speed = 10;
@@ -14,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public bool isRollingReady;
     public bool isGround;
     private bool isDead;
-    public bool isRooling;
+    public bool isRoling;
    public bool isInTunnel = false;
     private Rigidbody2D playerrigidbody;
     private AudioSource playerAudio;
@@ -32,8 +34,8 @@ public class PlayerController : MonoBehaviour
         isDead = false;
         playerrigidbody = GetComponent<Rigidbody2D>();
         playerAudio = GetComponent<AudioSource>();
-        isRooling = false;
-       
+        isRoling = false;
+      
 
     }
 
@@ -89,10 +91,10 @@ public class PlayerController : MonoBehaviour
             isRollingReady = true;
 
         }
-        else
+        if(Input.GetKeyUp(KeyCode.DownArrow))
         {
-           
-            isRollingReady = false;
+
+            anim.SetBool("Down", false);
 
         }
         
@@ -182,21 +184,25 @@ public class PlayerController : MonoBehaviour
 
     }
 
-   
+
 
     private void Rolling()
     {
-        if((isRollingReady==true) && Input.GetKeyDown(KeyCode.Return))
+        if (isRollingReady && Input.GetKey(KeyCode.Return))
         {
-            count++;
-            anim.SetTrigger("Rolling");
-            isRooling = true;
+            pressTime += Time.deltaTime; // 키를 누르는 동안 pressTime 증가
+            anim.SetBool("Rolling", true);
+            isRoling = true;
 
-            //transform.position += (Vector3)new Vector2(count, 0) * (speed *2)* Time.deltaTime;
+            if (Input.GetKeyUp(KeyCode.Return))
+            {
+                transform.Translate(Vector2.right * pressTime * speed); // 최종 이동
+                anim.SetBool("Rolling", false);
+                pressTime = 0f; // pressTime 초기화
+            }
         }
-
-
     }
+
 
     IEnumerator Dead()
     {
@@ -225,5 +231,7 @@ public class PlayerController : MonoBehaviour
             isGround = false; // 플레이어가 땅에서 떨어지면 즉시 isGround = false
         }
     }
+
+   
 
 }
