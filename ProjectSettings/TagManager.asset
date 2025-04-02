@@ -10,6 +10,7 @@ TagManager:
   - Potal
   - Left
   - Right
+  - BossRoom
   layers:
   - Default
   - TransparentFX
