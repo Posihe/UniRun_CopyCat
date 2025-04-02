@@ -238,11 +238,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if(collision.gameObject.CompareTag("BossRoom"))
-        {
-            SceneManager.LoadScene("Boss");
-
-        }
+       
 
 
     }

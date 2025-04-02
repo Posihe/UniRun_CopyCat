@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7632540267134454727}
   - component: {fileID: 5167077102622148660}
   m_Layer: 0
-  m_Name: decorative_36
+  m_Name: Stone
   m_TagString: Dead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
