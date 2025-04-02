@@ -238,6 +238,13 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        if(collision.gameObject.CompareTag("BossRoom"))
+        {
+            SceneManager.LoadScene("Boss");
+
+        }
+
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
