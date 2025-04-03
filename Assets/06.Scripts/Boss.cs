@@ -10,6 +10,8 @@ public class Boss : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriterenderer;
     private Animator anim;
+    public float actionInterval = 3f;
+    private float timer = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -23,11 +25,37 @@ public class Boss : MonoBehaviour
     void Update()
     {
         //Jump();
-        FireFire();
+        // FireFire();
+        timer += Time.deltaTime;
+        if(timer>=actionInterval)
+        {
+
+            TriggerRandomAction();
+            timer = 0f;
+        }
         
     }
 
+    void TriggerRandomAction()
+    {
 
+        int randomIndex = Random.Range(0, 2);
+        switch(randomIndex)
+        {
+
+            case 0:
+                Jump();
+                break;
+            case 1:
+                FireFire();
+                break;
+
+
+        }
+
+
+
+    }
 
     public void onfire()
     {
@@ -39,12 +67,14 @@ public class Boss : MonoBehaviour
     private void FireFire()
     {
         anim.SetTrigger("Fire");
+        Debug.Log("발사");
     }
 
     private void Jump()
     {
       
         anim.SetTrigger("Jump");
+        Debug.Log("점프");
 
     }
 
