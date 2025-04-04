@@ -33,6 +33,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void lossCoin()
+    {
+        score = 0;
+
+
+    }
+
     public void LoadMainScene()
     {
         shouldMovePlayer = true; //  포털을 통해 이동 시 위치 변경 활성화

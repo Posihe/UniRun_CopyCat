@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+
+    int hp;
     public int jumpcount = 2;
     public float pressTime;
     public Transform start;
@@ -23,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpClip;
     public AudioClip deadClip;
     private SpriteRenderer SpriteRenderer;
+    private float rollingTime = 1.0f; // 1초 동안 기다림
+    private int tapCount = 0; // 엔터 키 입력 횟수
 
     public float doubleTapTime = 0.3f;
 
@@ -32,6 +36,8 @@ public class PlayerController : MonoBehaviour
     private int lastDirection = 0;
     private bool boostReady = false;
     private bool isBoosted = false;
+
+    public GameObject coinpreFab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,6 +51,7 @@ public class PlayerController : MonoBehaviour
         isRoling = false;
 
         SpriteRenderer = GetComponent<SpriteRenderer>();
+        hp = GameManager.instance.score;
     }
 
     // Update is called once per frame
@@ -253,25 +260,46 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-
     private void Rolling()
     {
-        if (isRollingReady && Input.GetKey(KeyCode.Return))
-        {
-            pressTime += Time.deltaTime; // 키를 누르는 동안 pressTime 증가
-            anim.SetBool("Rolling", true);
-            isRoling = true;
+       
+        if (isRoling) return; // 이미 구르기 중이면 무시
 
-            if (Input.GetKeyUp(KeyCode.Return))
-            {
-                transform.Translate(Vector2.right * pressTime * speed); // 최종 이동
-                anim.SetBool("Rolling", false);
-                pressTime = 0f; // pressTime 초기화
-            }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            tapCount++; // 엔터 키 입력 횟수 증가
+            lastTapTime = Time.time; // 마지막 입력 시간 업데이트
+
+            // Rolling 애니메이션 실행
+            anim.SetBool("Rolling", true);
+        }
+
+        // 마지막 입력 후 1초가 지나면 이동 시작
+        if (!isRoling && tapCount > 0 && Time.time - lastTapTime >= doubleTapTime)
+        {
+            StartCoroutine(StartRolling());
         }
     }
+ // 코루틴: 1초 후 입력된 횟수에 비례하여 이동
+    private IEnumerator StartRolling()
+    {
 
+        isRoling = true; // 구르기 시작
+
+        // 이동 거리 = 기본 속도 * 입력 횟수
+        float moveDistance = speed * tapCount;
+
+        // 오른쪽 방향으로 순간적인 힘 적용 (Impulse 사용)
+        playerrigidbody.AddForce(Vector2.right * moveDistance, ForceMode2D.Impulse);
+
+        // 입력 횟수 초기화
+        tapCount = 0;
+
+        // Rolling 애니메이션을 0.5초 후에 종료
+        yield return new WaitForSeconds(0.5f);
+        anim.SetBool("Rolling", false);
+        isRoling = false;
+    }
 
     IEnumerator Dead()
     {
@@ -300,7 +328,22 @@ public class PlayerController : MonoBehaviour
             isGround = false; // 플레이어가 땅에서 떨어지면 즉시 isGround = false
         }
     }
+    public void Hit()
+    {
+        float randomvalue = Random.Range(0, 3);
+       
+        
+            for (int i = 1; i < hp; i++)
+            {
+                for(int j=1; j<360; j++)
+                Instantiate(coinpreFab, transform.position, Quaternion.Euler(0,0,j));
 
-   
+
+
+            }
+         GameManager.instance.lossCoin();
+       
+    }
+
 
 }

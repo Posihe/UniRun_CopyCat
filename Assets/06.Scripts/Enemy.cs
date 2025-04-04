@@ -88,6 +88,8 @@ public class Enemy : MonoBehaviour
                     Debug.Log("¿ÞÂÊ °ø°Ý");
                 }
 
+               
+
 
 
             }
