@@ -1,18 +1,20 @@
 
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.U2D;
 
 
 
 public class PlayerController : MonoBehaviour
 {
 
-    int hp;
+    //int hp;
     public int jumpcount = 2;
+    public float jumpForce = 400;
     public float pressTime;
-    public Transform start;
-    public Transform target;
+    public int hp;
     public float speed = 5;
     private Animator anim;
     public bool isRollingReady;
@@ -38,6 +40,14 @@ public class PlayerController : MonoBehaviour
     private bool isBoosted = false;
 
     public GameObject coinpreFab;
+    //모바일용
+    private bool isRightPressed = false;
+    private bool isLeftPressed = false;
+    private bool isJumpPressed = false;
+    private bool isMrollingready = false;
+    private bool isMrolling = false;
+    private bool isReturn = false;
+    private bool mRun = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,30 +59,75 @@ public class PlayerController : MonoBehaviour
         playerrigidbody = GetComponent<Rigidbody2D>();
         playerAudio = GetComponent<AudioSource>();
         isRoling = false;
+        isGround = true;
 
         SpriteRenderer = GetComponent<SpriteRenderer>();
-        hp = GameManager.instance.score;
+       
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (isDead == false)
+       if(Input.GetKey(KeyCode.P))
         {
-            Move();
+
+            isReturn = true;
+
+        }
+
+
+        Move();
             Down();
             Jump();
             Rolling();
-        }
+
+           
+
         
 
-          if(isInTunnel==true &&Input.GetKeyDown(KeyCode.DownArrow ))
+        // 지속적인 버튼 입력 상태 감지
+        if (isRightPressed)
+        {
+            MoveRight();
+            if(isReturn)
+            {
+                anim.SetBool("Run", true);
+                transform.Translate(Vector2.right * (speed*2) * Time.deltaTime);
+
+            }
+        }
+        else if (isLeftPressed)
+        {
+            MoveLeft();
+            if (isReturn)
+            {
+                anim.SetBool("Run", true);
+                transform.Translate(Vector2.left * (speed * 2) * Time.deltaTime);
+
+            }
+        }
+        if (isJumpPressed)
+        {
+            Mjump();
+
+        }
+
+        if(isMrollingready && isReturn)
+        {
+            Mrolling();
+
+
+        }
+
+
+        if (isInTunnel==true &&Input.GetKeyDown(KeyCode.DownArrow ))
         {
             StartCoroutine(InTunnel());
 
         }
-           
+
+        hp = GameManager.instance.score;
 
         
     }
@@ -166,19 +221,19 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        float jumpForce = 400;
+     
         float yinput = Input.GetAxis("Vertical");
-        
-     if(Input.GetKeyDown(KeyCode.Space) &&jumpcount>0)
+
+        if (Input.GetKeyDown(KeyCode.Space) && jumpcount > 0)
         {
             playerAudio.clip = jumpClip;
             playerAudio.Play();
-            anim.SetBool("Jump",true);
+            anim.SetBool("Jump", true);
             isGround = false;
             playerrigidbody.linearVelocity = Vector2.zero;
-            playerrigidbody.AddForce(new Vector2(0,jumpForce));
+            playerrigidbody.AddForce(new Vector2(0, jumpForce));
             jumpcount--;
-        
+
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -217,12 +272,15 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        playerAudio.clip = deadClip;
-        playerAudio.Play();
         isDead = true;
-        anim.SetTrigger("Dead");
-        StartCoroutine(Dead());
-        playerrigidbody.AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
+            playerAudio.clip = deadClip;
+            playerAudio.Play();
+            isDead = true;
+            anim.SetTrigger("Dead");
+            StartCoroutine(Dead());
+          
+            playerrigidbody.AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
+        
 
         
 
@@ -328,21 +386,186 @@ public class PlayerController : MonoBehaviour
             isGround = false; // 플레이어가 땅에서 떨어지면 즉시 isGround = false
         }
     }
+    
+
     public void Hit()
     {
-        float randomvalue = Random.Range(0, 3);
-       
-        
-            for (int i = 1; i < hp; i++)
+        int currentHp = GameManager.instance.score;
+        float randomvalue = Random.Range(0, 360);
+
+        if (currentHp > 0)
+        {
+            for (int i = 0; i < hp; i++)
             {
-                for(int j=1; j<360; j++)
-                Instantiate(coinpreFab, transform.position, Quaternion.Euler(0,0,j));
+                Debug.Log("피격");
 
+                // 플레이어 주변 랜덤 위치로 생성
+                Vector2 spawnOffset = Random.insideUnitCircle.normalized * 1.5f;
+                Vector2 spawnPos = (Vector2)transform.position + spawnOffset;
 
+                GameObject coin = Instantiate(coinpreFab, spawnPos, Quaternion.Euler(0, 0, randomvalue));
 
+                // 코인에 생성 직후 무적 효과 (예: 콜라이더 비활성화 후 재활성)
+                StartCoroutine(EnableCoinCollider(coin));
             }
-         GameManager.instance.lossCoin();
-       
+
+            GameManager.instance.lossCoin();
+        }
+        else if(hp==0)
+        {
+            Die();
+        }
+    }
+
+    // 코인 콜라이더를 일정 시간 후에 활성화
+    IEnumerator EnableCoinCollider(GameObject coin)
+    {
+        Collider2D col = coin.GetComponent<Collider2D>();
+        if (col != null)
+        {
+            col.enabled = false;
+            yield return new WaitForSeconds(0.5f); // 0.5초 후 다시 충돌 가능
+            col.enabled = true;
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  모바일 버튼 코드
+
+    public void ReturnButtonDown()
+    {
+        isReturn = true;
+
+    }
+
+    public void ReturnButtonUp()
+    {
+
+        isReturn = false;
+
+
+    }
+    public void OnJumpButtonDown()
+    {
+        isJumpPressed = true;
+        isMrollingready = true;
+
+    }
+
+    public void onJumpButtonUp()
+    {
+
+        isJumpPressed = false;
+        isMrollingready = false;
+
+    }
+
+    public void OnRightButtonDown()
+    {
+        isRightPressed = true;
+    }
+
+    public void OnRightButtonUp()
+    {
+        isRightPressed = false;
+        anim.SetBool("Walk", false); // 걷기 애니메이션 정지
+    }
+
+    public void OnLeftButtonDown()
+    {
+        isLeftPressed = true;
+
+    }
+
+    public void OnLeftButtonUp()
+    {
+        isLeftPressed = false;
+        anim.SetBool("Walk", false); // 걷기 애니메이션 정지
+    }
+
+    public void onDownButtonDown()
+    {
+        isMrollingready = true;
+        anim.SetBool("Down", true);
+
+    }
+
+    public void onDownButtonUp()
+    {
+        isMrollingready = false;
+        anim.SetBool("Down", false);
+
+
+    }
+    private void MoveRight()
+    {
+        SpriteRenderer.flipX = false;
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        anim.SetBool("Walk", true);
+    }
+
+    private void MoveLeft()
+    {
+        SpriteRenderer.flipX = true;
+        transform.Translate(Vector2.left * speed * Time.deltaTime);
+        anim.SetBool("Walk", true);
+    }
+
+    private void Mjump()
+    {
+
+        if (jumpcount > 0)
+        {
+            playerAudio.clip = jumpClip;
+            playerAudio.Play();
+            anim.SetBool("Jump", true);
+            isGround = false;
+            playerrigidbody.linearVelocity = Vector2.zero;
+            playerrigidbody.AddForce(new Vector2(0, jumpForce));
+            jumpcount--;
+        }
+
+
+    }
+
+    private void Mrolling()
+    {
+        if (isMrolling) return;
+
+        if (isMrollingready && isReturn)
+        {
+            tapCount++;
+            lastTapTime = Time.time;
+            anim.SetBool("Rolling", true);
+
+           
+            isMrollingready = false;
+            isReturn = false;
+        }
+
+        if (!isMrolling && tapCount > 0 && Time.time - lastTapTime >= doubleTapTime)
+        {
+            StartCoroutine(StartmRolling()); // 모바일용 롤링 코루틴 호출
+        }
+
+    }
+    private IEnumerator StartmRolling()
+    {
+
+        isMrolling = true; // 구르기 시작
+
+        // 이동 거리 = 기본 속도 * 입력 횟수
+        float moveDistance = speed * tapCount;
+
+        // 오른쪽 방향으로 순간적인 힘 적용 (Impulse 사용)
+        playerrigidbody.AddForce(Vector2.right * moveDistance, ForceMode2D.Impulse);
+
+        // 입력 횟수 초기화
+        tapCount = 0;
+
+        // Rolling 애니메이션을 0.5초 후에 종료
+        yield return new WaitForSeconds(0.5f);
+        anim.SetBool("Rolling", false);
+        isMrolling= false;
     }
 
 

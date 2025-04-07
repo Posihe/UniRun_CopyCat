@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1895947943
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -8633028130266864619, guid: 6cb37dcdc7ac69a4b8ecee548bf7fdd1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -194,14 +194,15 @@ MonoBehaviour:
   jumpcount: 2
   pressTime: 0
   start: {fileID: 8339843978553302660}
-  target: {fileID: 0}
-  speed: 10
+  speed: 5
   isRollingReady: 0
   isGround: 0
   isRoling: 0
   isInTunnel: 0
   jumpClip: {fileID: 8300000, guid: 9a63585911b9d8d48ab99af81f82e152, type: 3}
   deadClip: {fileID: 8300000, guid: b8d90f407c70e3c41af556971dcddeae, type: 3}
+  doubleTapTime: 0.3
+  coinpreFab: {fileID: 2569652009798132015, guid: 942d8ef22fd20a44bb8428e4edcfb00c, type: 3}
 --- !u!82 &4471104974473067369
 AudioSource:
   m_ObjectHideFlags: 0

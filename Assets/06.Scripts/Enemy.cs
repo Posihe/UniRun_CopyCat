@@ -107,7 +107,8 @@ public class Enemy : MonoBehaviour
    
     public void HIt()
     {
-         target.GetComponentInParent<PlayerController>().Die();
+        
+         target.GetComponentInParent<PlayerController>().Hit();
     }
 
     public void Die()

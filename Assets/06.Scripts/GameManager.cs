@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public bool isGameOver = false;
     public Vector2 playerPosition; // 특정 씬 이동 시 적용할 위치
-    public int score = 0;
+    public int score;
 
     private bool shouldMovePlayer = false; //  플레이어 위치 변경이 필요한 경우만 true
 
@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        score = 0;
     }
 
     public void AddCoin()
@@ -35,11 +36,21 @@ public class GameManager : MonoBehaviour
 
     public void lossCoin()
     {
-        score = 0;
+        if (score > 0)
+        {
+            score = 0;
+        }
+        else 
+        {
+            score = -1;
+        }
 
 
     }
-
+    public void ResetGame()
+    {
+        score = 0;
+    }
     public void LoadMainScene()
     {
         shouldMovePlayer = true; //  포털을 통해 이동 시 위치 변경 활성화
