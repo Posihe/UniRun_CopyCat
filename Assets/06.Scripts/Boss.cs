@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
@@ -12,6 +13,7 @@ public class Boss : MonoBehaviour
     private Animator anim;
     public float actionInterval = 3f;
     private float timer = 0f;
+    public GameObject pannel;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -98,5 +100,7 @@ public class Boss : MonoBehaviour
 
 
     }
+
+   
 
 }

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 {
 
     //int hp;
+    
     public int jumpcount = 2;
     public int mjumpcount = 2;
     public float jumpForce = 400;
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private bool isDead;
     public bool isRoling;
     public bool isInTunnel = false;
+    public bool watchRight;
+    public bool watchLeft;
     private Rigidbody2D playerrigidbody;
     private AudioSource playerAudio;
     public AudioClip jumpClip;
@@ -29,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer SpriteRenderer;
     private float rollingTime = 1.0f; // 1초 동안 기다림
     private int tapCount = 0; // 엔터 키 입력 횟수
+
 
     public float doubleTapTime = 0.3f;
 
@@ -61,7 +65,8 @@ public class PlayerController : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         isRoling = false;
         isGround = true;
-
+        watchRight = true;
+        watchLeft = false;
         SpriteRenderer = GetComponent<SpriteRenderer>();
 
 
@@ -93,6 +98,7 @@ public class PlayerController : MonoBehaviour
         // 지속적인 버튼 입력 상태 감지
         if (isRightPressed)
         {
+           
             MoveRight();
             if (isReturn)
             {
@@ -143,7 +149,30 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
         // 플레이어의 방향 전환 (왼쪽으로 가면 flipX를 true로 설정)
-        SpriteRenderer.flipX = horizontalInput < 0 ? true : false;
+       // SpriteRenderer.flipX = horizontalInput < 0 ? true : false;
+       if(horizontalInput<0)
+        {
+            watchRight = false;
+            watchLeft = true;
+            
+
+        }
+       else if(horizontalInput>0)
+        {
+
+            watchRight = true;
+            watchLeft = false;
+        }
+       if(watchRight)
+        {
+            SpriteRenderer.flipX = false;
+
+        }
+       else if(watchLeft)
+        {
+            SpriteRenderer.flipX = true;
+
+        }
 
         // 입력이 있을 경우 걷기 애니메이션 활성화
         if (horizontalInput != 0)
@@ -363,15 +392,43 @@ public class PlayerController : MonoBehaviour
         // 이동 거리 = 기본 속도 * 입력 횟수
         float moveDistance = speed * tapCount;
 
-        // 오른쪽 방향으로 순간적인 힘 적용 (Impulse 사용)
-        playerrigidbody.AddForce(Vector2.right * moveDistance, ForceMode2D.Impulse);
+        if (watchRight)
+        {
+            if (tapCount <= 3)
+            {
+                // 오른쪽 방향으로 순간적인 힘 적용 (Impulse 사용)
+                playerrigidbody.AddForce(Vector2.right * moveDistance, ForceMode2D.Impulse);
+            }
+            else if (tapCount > 3)
+            {
+                // 오른쪽 방향으로 순간적인 힘 적용 (Impulse 사용)
+                playerrigidbody.AddForce(Vector2.right * speed * 3, ForceMode2D.Impulse);
 
+            }
+        }
+        else if (watchLeft)
+        {
+
+            if (tapCount <= 3)
+            {
+                // 오른쪽 방향으로 순간적인 힘 적용 (Impulse 사용)
+                playerrigidbody.AddForce(Vector2.left * moveDistance, ForceMode2D.Impulse);
+            }
+            else if (tapCount > 3)
+            {
+                // 오른쪽 방향으로 순간적인 힘 적용 (Impulse 사용)
+                playerrigidbody.AddForce(Vector2.left * speed * 3, ForceMode2D.Impulse);
+
+            }
+
+        }
         // 입력 횟수 초기화
         tapCount = 0;
 
         // Rolling 애니메이션을 0.5초 후에 종료
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("Rolling", false);
+        playerrigidbody.linearVelocity = Vector2.zero;
         isRoling = false;
         isNothit = true;
     }
@@ -381,6 +438,8 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
+        SceneManager.LoadScene(1);
+       
     }
 
     IEnumerator InTunnel()
@@ -509,6 +568,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnRightButtonDown()
     {
+        watchLeft = false;
+        watchRight = true;
         isRightPressed = true;
     }
 
@@ -520,6 +581,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnLeftButtonDown()
     {
+        watchRight = false;
+        watchLeft = true;
         isLeftPressed = true;
 
     }
@@ -546,16 +609,22 @@ public class PlayerController : MonoBehaviour
     }
     private void MoveRight()
     {
-        SpriteRenderer.flipX = false;
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
-        anim.SetBool("Walk", true);
+        if (watchRight)
+        {
+            SpriteRenderer.flipX = false;
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            anim.SetBool("Walk", true);
+        }
     }
 
     private void MoveLeft()
     {
-        SpriteRenderer.flipX = true;
-        transform.Translate(Vector2.left * speed * Time.deltaTime);
-        anim.SetBool("Walk", true);
+        if (watchLeft)
+        {
+            SpriteRenderer.flipX = true;
+            transform.Translate(Vector2.left * speed * Time.deltaTime);
+            anim.SetBool("Walk", true);
+        }
     }
 
     private void Mjump()
@@ -604,17 +673,47 @@ public class PlayerController : MonoBehaviour
 
         // 이동 거리 = 기본 속도 * 입력 횟수
         float moveDistance = speed * tapCount;
+        if (watchRight)
+        {
+            if (tapCount <= 3)
+            {
+                // 오른쪽 방향으로 순간적인 힘 적용 (Impulse 사용)
+                playerrigidbody.AddForce(Vector2.right * moveDistance, ForceMode2D.Impulse);
+            }
+            else if (tapCount > 3)
+            {
+                // 오른쪽 방향으로 순간적인 힘 적용 (Impulse 사용)
+                playerrigidbody.AddForce(Vector2.right * speed * 3, ForceMode2D.Impulse);
 
-        // 오른쪽 방향으로 순간적인 힘 적용 (Impulse 사용)
-        playerrigidbody.AddForce(Vector2.right * moveDistance, ForceMode2D.Impulse);
+            }
+        }
+        else if(watchLeft)
+        {
 
-        // 입력 횟수 초기화
-        tapCount = 0;
+            if (tapCount <= 3)
+            {
+                // 오른쪽 방향으로 순간적인 힘 적용 (Impulse 사용)
+                playerrigidbody.AddForce(Vector2.left * moveDistance, ForceMode2D.Impulse);
+            }
+            else if (tapCount > 3)
+            {
+                // 오른쪽 방향으로 순간적인 힘 적용 (Impulse 사용)
+                playerrigidbody.AddForce(Vector2.left * speed * 3, ForceMode2D.Impulse);
+
+            }
+
+        }
+
+
+            // 입력 횟수 초기화
+            tapCount = 0;
 
         // Rolling 애니메이션을 0.5초 후에 종료
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("Rolling", false);
+        playerrigidbody.linearVelocity = Vector2.zero;
         isMrolling = false;
+        isNothit = true;
     }
 
 

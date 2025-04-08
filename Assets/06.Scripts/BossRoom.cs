@@ -3,14 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class BossRoom : MonoBehaviour
 {
+    public GameObject player;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Key"))
         {
-            if(Input.GetKeyDown(KeyCode.E))
+           
             SceneManager.LoadScene("Boss");
+            
 
         }
     }
+   
 }
