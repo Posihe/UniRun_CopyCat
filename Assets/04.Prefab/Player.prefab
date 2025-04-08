@@ -192,8 +192,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpcount: 2
+  mjumpcount: 2
+  jumpForce: 400
   pressTime: 0
-  start: {fileID: 8339843978553302660}
+  hp: 0
   speed: 5
   isRollingReady: 0
   isGround: 0
@@ -203,6 +205,7 @@ MonoBehaviour:
   deadClip: {fileID: 8300000, guid: b8d90f407c70e3c41af556971dcddeae, type: 3}
   doubleTapTime: 0.3
   coinpreFab: {fileID: 2569652009798132015, guid: 942d8ef22fd20a44bb8428e4edcfb00c, type: 3}
+  isMrolling: 0
 --- !u!82 &4471104974473067369
 AudioSource:
   m_ObjectHideFlags: 0
@@ -316,7 +319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3464684066113555221
 Transform:
   m_ObjectHideFlags: 0

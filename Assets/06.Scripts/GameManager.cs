@@ -10,8 +10,12 @@ public class GameManager : MonoBehaviour
 
     private bool shouldMovePlayer = false; //  플레이어 위치 변경이 필요한 경우만 true
 
+    private AudioSource Audio;
+    public AudioClip CoinClip;
+
     private void Awake()
     {
+
         DontDestroyOnLoad(gameObject);
 
         if (instance == null)
@@ -24,6 +28,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         score = 0;
+        Audio = GetComponent<AudioSource>();
     }
 
     public void AddCoin()
@@ -31,6 +36,8 @@ public class GameManager : MonoBehaviour
         if (!isGameOver)
         {
             score++;
+            Audio.clip = CoinClip;
+            Audio.Play();
         }
     }
 

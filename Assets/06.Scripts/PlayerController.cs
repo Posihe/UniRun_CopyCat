@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -12,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     //int hp;
     public int jumpcount = 2;
+    public int mjumpcount = 2;
     public float jumpForce = 400;
     public float pressTime;
     public int hp;
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public bool isGround;
     private bool isDead;
     public bool isRoling;
-   public bool isInTunnel = false;
+    public bool isInTunnel = false;
     private Rigidbody2D playerrigidbody;
     private AudioSource playerAudio;
     public AudioClip jumpClip;
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private int lastDirection = 0;
     private bool boostReady = false;
     private bool isBoosted = false;
+    public bool isNothit = true;
 
     public GameObject coinpreFab;
     //모바일용
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
     private bool isLeftPressed = false;
     private bool isJumpPressed = false;
     private bool isMrollingready = false;
-    private bool isMrolling = false;
+    public bool isMrolling = false;
     private bool isReturn = false;
     private bool mRun = false;
 
@@ -54,7 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         isRollingReady = false;
-      
+
         isDead = false;
         playerrigidbody = GetComponent<Rigidbody2D>();
         playerAudio = GetComponent<AudioSource>();
@@ -62,14 +63,14 @@ public class PlayerController : MonoBehaviour
         isGround = true;
 
         SpriteRenderer = GetComponent<SpriteRenderer>();
-       
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(Input.GetKey(KeyCode.P))
+        if (Input.GetKey(KeyCode.P))
         {
 
             isReturn = true;
@@ -78,22 +79,25 @@ public class PlayerController : MonoBehaviour
 
 
         Move();
-            Down();
+        Down();
+        if (!isRollingReady)
+        {
             Jump();
-            Rolling();
+        }
+        Rolling();
 
-           
 
-        
+
+
 
         // 지속적인 버튼 입력 상태 감지
         if (isRightPressed)
         {
             MoveRight();
-            if(isReturn)
+            if (isReturn)
             {
                 anim.SetBool("Run", true);
-                transform.Translate(Vector2.right * (speed*2) * Time.deltaTime);
+                transform.Translate(Vector2.right * (speed * 2) * Time.deltaTime);
 
             }
         }
@@ -110,10 +114,11 @@ public class PlayerController : MonoBehaviour
         if (isJumpPressed)
         {
             Mjump();
+            isJumpPressed = false;
 
         }
 
-        if(isMrollingready && isReturn)
+        if (isMrollingready && isReturn)
         {
             Mrolling();
 
@@ -121,7 +126,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (isInTunnel==true &&Input.GetKeyDown(KeyCode.DownArrow ))
+        if (isInTunnel == true && Input.GetKeyDown(KeyCode.DownArrow))
         {
             StartCoroutine(InTunnel());
 
@@ -129,7 +134,7 @@ public class PlayerController : MonoBehaviour
 
         hp = GameManager.instance.score;
 
-        
+
     }
 
     public void Move()
@@ -203,25 +208,26 @@ public class PlayerController : MonoBehaviour
     public void Down()
     {
 
-        if (Input.GetKey(KeyCode.DownArrow)&&isInTunnel==false && isGround==true)
+        if (Input.GetKey(KeyCode.DownArrow) && isInTunnel == false && isGround == true)
         {
             anim.SetBool("Down", true);
             isRollingReady = true;
 
         }
-        if(Input.GetKeyUp(KeyCode.DownArrow))
+        if (Input.GetKeyUp(KeyCode.DownArrow))
         {
 
             anim.SetBool("Down", false);
+            isRollingReady = false;
 
         }
-        
+
 
     }
 
     public void Jump()
     {
-     
+
         float yinput = Input.GetAxis("Vertical");
 
         if (Input.GetKeyDown(KeyCode.Space) && jumpcount > 0)
@@ -238,33 +244,42 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            
+
             isGround = true;
             jumpcount = 2;
+            mjumpcount = 2;
             anim.SetBool("Jump", false);
-            
-            
+
+
 
         }
-        
+        if (collision.gameObject.CompareTag("Tunnel"))
+        {
+
+            isGround = true;
+            jumpcount = 2;
+            mjumpcount = 2;
+            anim.SetBool("Jump", false);
+        }
+
 
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isGround = true;
 
 
         }
 
-        if (collision.gameObject.CompareTag("Tunnel") )
+        if (collision.gameObject.CompareTag("Tunnel"))
         {
-            
+
             isInTunnel = true;
-           
+
 
         }
     }
@@ -273,44 +288,44 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         isDead = true;
-            playerAudio.clip = deadClip;
-            playerAudio.Play();
-            isDead = true;
-            anim.SetTrigger("Dead");
-            StartCoroutine(Dead());
-          
-            playerrigidbody.AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
-        
+        playerAudio.clip = deadClip;
+        playerAudio.Play();
+        isDead = true;
+        anim.SetTrigger("Dead");
+        StartCoroutine(Dead());
 
-        
+        playerrigidbody.AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
+
+
+
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Dead"))
+        if (collision.CompareTag("Dead"))
         {
             gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             Die();
             StartCoroutine(Dead());
-           
+
         }
 
         if (collision.gameObject.CompareTag("Potal"))
         {
 
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
 
         }
 
-       
+
 
 
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("BossRoom"))
+        if (collision.gameObject.CompareTag("BossRoom"))
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -323,8 +338,9 @@ public class PlayerController : MonoBehaviour
        
         if (isRoling) return; // 이미 구르기 중이면 무시
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (isRollingReady &&Input.GetKeyDown(KeyCode.Return))
         {
+            isNothit = false;
             tapCount++; // 엔터 키 입력 횟수 증가
             lastTapTime = Time.time; // 마지막 입력 시간 업데이트
 
@@ -338,7 +354,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(StartRolling());
         }
     }
- // 코루틴: 1초 후 입력된 횟수에 비례하여 이동
+    // 코루틴: 1초 후 입력된 횟수에 비례하여 이동
     private IEnumerator StartRolling()
     {
 
@@ -357,22 +373,23 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("Rolling", false);
         isRoling = false;
+        isNothit = true;
     }
 
     IEnumerator Dead()
     {
-        
+
         yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
     }
 
-   IEnumerator InTunnel()
+    IEnumerator InTunnel()
     {
         GameObject tunnelObject = GameObject.FindWithTag("Tunnel");
         tunnelObject.GetComponent<BoxCollider2D>().enabled = false;
 
-       
-        
+
+
         yield return new WaitForSeconds(1);
         tunnelObject.GetComponent<BoxCollider2D>().enabled = true;
 
@@ -386,14 +403,14 @@ public class PlayerController : MonoBehaviour
             isGround = false; // 플레이어가 땅에서 떨어지면 즉시 isGround = false
         }
     }
-    
+
 
     public void Hit()
     {
         int currentHp = GameManager.instance.score;
         float randomvalue = Random.Range(0, 360);
 
-        if (currentHp > 0)
+        if (currentHp > 0 && isNothit)
         {
             for (int i = 0; i < hp; i++)
             {
@@ -407,15 +424,37 @@ public class PlayerController : MonoBehaviour
 
                 // 코인에 생성 직후 무적 효과 (예: 콜라이더 비활성화 후 재활성)
                 StartCoroutine(EnableCoinCollider(coin));
+                StartCoroutine(DestroyCoin(coin));
             }
 
             GameManager.instance.lossCoin();
+            StartCoroutine(Hurt());
         }
-        else if(hp==0)
+        else if (hp == 0)
         {
             Die();
         }
     }
+    IEnumerator Hurt()
+    {
+
+        isNothit = false;
+        StartCoroutine(HitEffect());
+        yield return new WaitForSeconds(1);
+        isNothit = true;
+    }
+    IEnumerator HitEffect()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            SpriteRenderer.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            SpriteRenderer.enabled = true;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+    }
+
 
     // 코인 콜라이더를 일정 시간 후에 활성화
     IEnumerator EnableCoinCollider(GameObject coin)
@@ -427,6 +466,14 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.5f); // 0.5초 후 다시 충돌 가능
             col.enabled = true;
         }
+    }
+    IEnumerator DestroyCoin(GameObject coin)
+    {
+
+        yield return new WaitForSeconds(2);
+        Destroy(coin);
+
+
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  모바일 버튼 코드
@@ -447,7 +494,8 @@ public class PlayerController : MonoBehaviour
     public void OnJumpButtonDown()
     {
         isJumpPressed = true;
-        isMrollingready = true;
+
+
 
     }
 
@@ -455,7 +503,7 @@ public class PlayerController : MonoBehaviour
     {
 
         isJumpPressed = false;
-        isMrollingready = false;
+
 
     }
 
@@ -513,7 +561,7 @@ public class PlayerController : MonoBehaviour
     private void Mjump()
     {
 
-        if (jumpcount > 0)
+        if (mjumpcount > 0 && !isMrollingready)
         {
             playerAudio.clip = jumpClip;
             playerAudio.Play();
@@ -521,7 +569,8 @@ public class PlayerController : MonoBehaviour
             isGround = false;
             playerrigidbody.linearVelocity = Vector2.zero;
             playerrigidbody.AddForce(new Vector2(0, jumpForce));
-            jumpcount--;
+            mjumpcount--;
+
         }
 
 
@@ -537,7 +586,7 @@ public class PlayerController : MonoBehaviour
             lastTapTime = Time.time;
             anim.SetBool("Rolling", true);
 
-           
+
             isMrollingready = false;
             isReturn = false;
         }
@@ -565,7 +614,7 @@ public class PlayerController : MonoBehaviour
         // Rolling 애니메이션을 0.5초 후에 종료
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("Rolling", false);
-        isMrolling= false;
+        isMrolling = false;
     }
 
 

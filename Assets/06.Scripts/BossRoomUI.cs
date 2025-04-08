@@ -21,6 +21,12 @@ public class BossRoomUI : MonoBehaviour
             survieTime -= Time.deltaTime;
             TimeText.text = "Time:" + (int)survieTime;
 
+            if(survieTime<=0)
+            {
+
+                TimeText.text = "Time:" + 0;
+            }
+
         }
 
         if(survieTime<=0)
